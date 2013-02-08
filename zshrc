@@ -1,3 +1,9 @@
+# ==== Paths ==================================================================
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+
+# On Mac OS X, the git installation I have ended up here.
+export PATH=$PATH:/usr/local/git/bin
+
 # ==== Prompt =================================================================
 
 # Gives the $fg_bold[color] variables for use in the prompt.
@@ -31,9 +37,6 @@ PROMPT="$PROMPT
 # Show #/% in green for a successful command, red otherwise.
 PROMPT="$PROMPT%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%# "
 PROMPT="$PROMPT%{$reset_color%}"
-
-# ==== Paths ==================================================================
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 
 # ==== Aliases ================================================================
 alias review='arc diff --verbatim --allow-untracked --reviewers'
