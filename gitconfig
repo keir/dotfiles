@@ -1,0 +1,7 @@
+[user]
+  email = mierle@gmail.com
+  name = Keir Mierle
+
+[alias]
+  st = status --short
+  ds = diff --stat
