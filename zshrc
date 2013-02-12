@@ -35,9 +35,7 @@ setopt prompt_subst
 
 # Print the current branch, or nothing if not on a branch.
 git_branch() {
- if [ -d .git ] ; then
-   git symbolic-ref HEAD | cut -d'/' -f3
- fi
+  git symbolic-ref HEAD 2> /dev/null | cut -d'/' -f3
 }
 
 # Pick four colors at random, seeded by the hostname, when the shell is
