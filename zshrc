@@ -78,5 +78,34 @@ PROMPT="$PROMPT%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%# "
 PROMPT="$PROMPT%{$reset_color%}"
 
 # ==== Aliases ================================================================
-alias review='arc diff --verbatim --allow-untracked --reviewers'
+
+# Normal aliases.
 alias ls='ls --color'
+alias ll='ls -l --color'
+
+# Make sending insta-reviews easy.
+alias review='arc diff --verbatim --allow-untracked --reviewers'
+
+# Global aliases; these expand anywhere on the command line.
+
+# Handy directory navigation.
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+
+# Handy pipe operators.
+alias -g G='| grep'
+alias -g H='| head'
+alias -g T='| tail'
+alias -g L='| less'
+alias -g V='| vim -'
+
+# Same as above, but combines stdout and stderr.
+alias -g EG='|& grep'
+alias -g EH='|& head'
+alias -g ET='|& tail'
+alias -g EL='|& less'
+alias -g EV='|& vim -'
+
+alias -g XG='| xargs grep'
+alias -g X='| xargs'
