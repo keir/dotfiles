@@ -1,6 +1,9 @@
 # ==== Paths ==================================================================
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 
+# Add the handy scripts in the dotfiles repo to the path.
+export PATH=$PATH:$HOME/dotfiles/bin
+
 # On Mac OS X, the git installation I have ended up here.
 export PATH=$PATH:/usr/local/git/bin
 
@@ -76,3 +79,4 @@ PROMPT="$PROMPT%{$reset_color%}"
 
 # ==== Aliases ================================================================
 alias review='arc diff --verbatim --allow-untracked --reviewers'
+alias ls='ls --color'
