@@ -80,8 +80,15 @@ PROMPT="$PROMPT%{$reset_color%}"
 # ==== Aliases ================================================================
 
 # Normal aliases.
-alias ls='ls --color'
-alias ll='ls -l --color'
+if [ -d /Users ] ; then
+  # Mac
+  alias ls='ls -G'
+  alias ll='ls -l -G'
+else
+  # Linux
+  alias ls='ls --color'
+  alias ll='ls -l --color'
+fi
 
 # Make sending insta-reviews easy.
 alias review='arc diff --verbatim --allow-untracked --reviewers'
