@@ -1,3 +1,8 @@
+# ==== ZSH options ============================================================
+
+# Enable support for stuff like e.g. 'ls *^(a|b)' for negated globs.
+setopt extended_glob
+
 # ==== Paths ==================================================================
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 
