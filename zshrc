@@ -7,6 +7,14 @@ export PATH=$PATH:$HOME/dotfiles/bin
 # On Mac OS X, the git installation I have ended up here.
 export PATH=$PATH:/usr/local/git/bin
 
+# ==== Options ================================================================
+
+# Support extended globbing
+setopt extendedglob
+
+# Change into directories just with their name (no "cd" necessary).
+setopt autocd
+
 # ==== Colors =================================================================
 # Make using 256 colors less annoying. This adds the variables $FG[color],
 # $BG[color], and $FX[effect] to make colorizing easier. The color value must
