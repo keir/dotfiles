@@ -8,11 +8,14 @@ parser = argparse.ArgumentParser(
     description='regex replacement with python')
 parser.add_argument('-p', '--pattern', required=True)                       
 parser.add_argument('-r', '--replacement', required=True)
+parser.add_argument('--raw', help='use raw strings and not regexes',
+                    action='store_true')
 parser.add_argument('files', help='files to run the replacement on', nargs='*')
 
 args = parser.parse_args()
 
-regex = re.compile(args.pattern)
+if not args.raw:
+  regex = re.compile(args.pattern)
 
 if args.files:
   # Substitute in-place on each file.
@@ -20,7 +23,10 @@ if args.files:
     with file(filename) as fd:
       data = fd.read()
     with file(filename, 'w') as fd:
-      fd.write(regex.sub(args.replacement, data))
+      if args.raw:
+        fd.write(data.replace(args.pattern, args.replacement))
+      else:
+        fd.write(regex.sub(args.replacement, data))
 else:
   # Substitute from stdin to stdout.
   print regex.sub(args.replacement, sys.stdin.read()),
