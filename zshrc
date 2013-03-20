@@ -85,6 +85,16 @@ PROMPT="$PROMPT
 PROMPT="$PROMPT%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%# "
 PROMPT="$PROMPT%{$reset_color%}"
 
+# ==== Phabricator helper functions ===========================================
+
+function reviewnow {
+  git checkout -b quickdiff-$(date "+%Y-%m-%dT%H-%M-%S")
+  git commit -a -m "'$1'"
+  arc diff --verbatim --allow-untracked --reviewers $2
+}
+
+alias review='arc diff --verbatim --allow-untracked --reviewers'
+
 # ==== Aliases ================================================================
 
 # Normal aliases.
@@ -97,9 +107,6 @@ else
   alias ls='ls --color'
   alias ll='ls -l --color'
 fi
-
-# Make sending insta-reviews easy.
-alias review='arc diff --verbatim --allow-untracked --reviewers'
 
 # Global aliases; these expand anywhere on the command line.
 
