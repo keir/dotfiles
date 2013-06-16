@@ -12,3 +12,6 @@ set noswapfile
 
 syntax enable
 colorscheme desert
+
+" The default red color column is obnoxius in terminals.
+highlight ColorColumn ctermbg=8
