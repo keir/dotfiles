@@ -3,4 +3,11 @@
 import sys
 import simplejson as json
 
-print json.dumps(json.loads(sys.stdin.read()), indent=2)
+json_input = sys.stdin.read()
+try:
+  json_object = json.loads(json_input)
+except ValueError:
+  print "ERROR: Couldn't parse stdin as JSON. Input:"
+  print json_input
+
+print json.dumps(json_object, indent=2, sort_keys=True)
