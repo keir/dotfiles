@@ -139,5 +139,9 @@ alias -g X='| xargs'
 
 # Git aliases.
 alias gs='git status'
+alias gst='git status'
 alias gd='git diff'
 alias gds='git diff --stat'
+alias gdst='git diff --stat'
+alias gcam='git commit -a -m'
+alias gam='git commit -a --amend'
