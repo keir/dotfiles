@@ -136,3 +136,8 @@ alias -g EV='|& vim -'
 
 alias -g XG='| xargs grep'
 alias -g X='| xargs'
+
+# Git aliases.
+alias gs='git status'
+alias gd='git diff'
+alias gds='git diff --stat'
