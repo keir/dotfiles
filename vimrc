@@ -10,7 +10,7 @@ set expandtab
 set hlsearch
 set ignorecase
 set colorcolumn=81
-set statusline=%f\ %y\ format:\ %{&ff};\ C%c\ L%l
+set statusline=%f\ %y\ format:\ %{&ff};\ C%c\ L%l/%L
 set noswapfile
 
 syntax enable
