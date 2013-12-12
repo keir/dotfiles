@@ -50,6 +50,7 @@ autoload -U colors && colors
 setopt prompt_subst
 
 # Print the current branch, or nothing if not on a branch.
+# Used by "qd" below so don't remove without updating that.
 git_branch() {
   git symbolic-ref HEAD 2> /dev/null | cut -d'/' -f3
 }
@@ -92,13 +93,51 @@ PROMPT="$PROMPT%{$reset_color%}"
 
 # ==== Phabricator helper functions ===========================================
 
-function reviewnow {
-  git checkout -b quickdiff-$(date "+%Y-%m-%dT%H-%M-%S")
-  git commit -a -m "$1"
-  arc diff --verbatim --allow-untracked --reviewers $2
-}
+function qd {
+  declare -r cmd=$0
+  declare -r message=$1
+  declare -r reviewer=$2
 
-alias review='arc diff --verbatim --allow-untracked --reviewers'
+  if [ -z $message ] ; then
+    echo "Quickly send a diff for review. Usage:"
+    echo
+    echo "  $cmd <message> [<reviewer>]"
+    echo
+    echo "Create or update a Phabricator Differential (code review)."
+    echo
+    echo "To create a new review, be on master with uncommitted"
+    echo "changes in the git repository, and run"
+    echo
+    echo "  $cmd 'Commit message here' myreviewer"
+    echo
+    echo "To update an existing diff, be on the diff branch and run"
+    echo
+    echo "  $cmd 'Tweaked comments'"
+    echo
+    echo "which will update the existing diff, adding the supplied message."
+    echo
+    echo "NOTE: This will NOT work 'git added' files because the script changes"
+    echo "branches and commits (which breaks with added files)"
+    return 1
+  fi
+
+  if [ -z $reviewer ] ; then
+    echo "$cmd: Updating existing diff with message: $message..."
+    if [[ $(git_branch) == 'master' ]] ; then
+      echo "$cmd: ERROR: Can't update a diff on master; did you forget a"
+      echo "$cmd:        reviewer or forget to switch to a branch?"
+      return 1
+    fi
+    git commit -a -m "$message"
+    arc diff --verbatim --allow-untracked --message "$message"
+    return 0
+  fi
+
+  echo "$cmd: Creating new diff with message: $message..."
+  git checkout -b qd-$(date "+%Y-%m-%dT%H-%M-%S")
+  git commit -a -m "$message"
+  arc diff --verbatim --allow-untracked --reviewers $reviewer
+}
 
 # ==== Aliases ================================================================
 
