@@ -5,3 +5,5 @@
 [alias]
   st = status --short
   ds = diff --stat
+[push]
+	default = simple

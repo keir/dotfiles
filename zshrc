@@ -12,6 +12,9 @@ export PATH=$PATH:$HOME/dotfiles/bin
 # On Mac OS X, the git installation I have ended up here.
 export PATH=$PATH:/usr/local/git/bin
 
+# On Mac OS X, I put Arc here
+export PATH=$PATH:/Users/keir/wrk/phabricator/arcanist/bin
+
 # ==== Options ================================================================
 
 # Support extended globbing
@@ -19,6 +22,10 @@ setopt extendedglob
 
 # Change into directories just with their name (no "cd" necessary).
 setopt autocd
+
+# ==== Editors ================================================================
+
+export EDITOR=vim
 
 # ==== Colors =================================================================
 # Make using 256 colors less annoying. This adds the variables $FG[color],
