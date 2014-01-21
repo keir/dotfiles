@@ -15,6 +15,9 @@ export PATH=$PATH:/usr/local/git/bin
 # On Mac OS X, I put Arc here
 export PATH=$PATH:/Users/keir/wrk/phabricator/arcanist/bin
 
+# On Mac OS X, various pip-installed things end up here.
+export PATH=$PATH:/usr/local/share/python/flake8
+
 # ==== Options ================================================================
 
 # Support extended globbing
