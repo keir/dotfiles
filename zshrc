@@ -16,7 +16,7 @@ export PATH=$PATH:/usr/local/git/bin
 export PATH=$PATH:/Users/keir/wrk/phabricator/arcanist/bin
 
 # On Mac OS X, various pip-installed things end up here.
-export PATH=$PATH:/usr/local/share/python/flake8
+export PATH=$PATH:/usr/local/share/python
 
 # ==== Options ================================================================
 
