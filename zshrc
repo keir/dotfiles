@@ -30,6 +30,10 @@ setopt autocd
 
 export EDITOR=vim
 
+# If EDITOR=vim, zsh assumes you also want vim style keybindings on the command
+# line. Since I don't want that, explicitly set emacs style bindings.
+bindkey -e
+
 # ==== Colors =================================================================
 # Make using 256 colors less annoying. This adds the variables $FG[color],
 # $BG[color], and $FX[effect] to make colorizing easier. The color value must
