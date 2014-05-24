@@ -1,37 +1,57 @@
-# ==== ZSH options ============================================================
+# Copyright (c) 2014 Keir Mierle
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+declare -r OS=$(uname)
+
+# ==== Options ================================================================
 
 # Enable support for stuff like e.g. 'ls *^(a|b)' for negated globs.
 setopt extended_glob
 
-# ==== Paths ==================================================================
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
-
-# Add the handy scripts in the dotfiles repo to the path.
-export PATH=$PATH:$HOME/dotfiles/bin
-
-# On Mac OS X, the git installation I have ended up here.
-export PATH=$PATH:/usr/local/git/bin
-
-# On Mac OS X, I put Arc here
-export PATH=$PATH:$HOME/wrk/phabricator/arcanist/bin
-
-# On Mac OS X, various pip-installed things end up here.
-export PATH=$PATH:/usr/local/share/python
-
-# ==== Options ================================================================
-
-# Support extended globbing
-setopt extendedglob
-
 # Change into directories just with their name (no "cd" necessary).
 setopt autocd
+
+# ==== Paths ==================================================================
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+function append_path {
+  export PATH=$PATH:$1
+}
+
+append_path $HOME/dotfiles/bin
+append_path $HOME/wrk/phabricator/arcanist/bin
+
+if [[ $OS == 'Darwin' ]] ; then 
+  # The Mac OS X Git installer puts Git here.
+  append_path /usr/local/git/bin
+
+  # Pip installed binaries go here.
+  append_path /usr/local/share/python
+fi
 
 # ==== Editors ================================================================
 
 export EDITOR=vim
 
-# If EDITOR=vim, zsh assumes you also want vim style keybindings on the command
-# line. Since I don't want that, explicitly set emacs style bindings.
+# If EDITOR=vim, zsh assumes you also want Vim style keybindings on the command
+# line. Since I don't want that, explicitly set Emacs style bindings.
 bindkey -e
 
 # ==== Colors =================================================================
@@ -156,8 +176,7 @@ function qd {
 # ==== Aliases ================================================================
 
 # Normal aliases.
-if [ -d /Users ] ; then
-  # Mac
+if [[ $OS == 'Darwin' ]] ; then
   alias ls='ls -G'
   alias ll='ls -l -G'
 else
