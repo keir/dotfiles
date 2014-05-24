@@ -13,7 +13,7 @@ export PATH=$PATH:$HOME/dotfiles/bin
 export PATH=$PATH:/usr/local/git/bin
 
 # On Mac OS X, I put Arc here
-export PATH=$PATH:/Users/keir/wrk/phabricator/arcanist/bin
+export PATH=$PATH:$HOME/wrk/phabricator/arcanist/bin
 
 # On Mac OS X, various pip-installed things end up here.
 export PATH=$PATH:/usr/local/share/python
