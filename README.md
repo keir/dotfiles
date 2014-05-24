@@ -1,11 +1,11 @@
 dotfiles
 ========
 
-Miscellaneous dotfiles for my unix machines
+My Unix configurations and some miscellaneous binaries.
 
 Installation:
 
-    curl https://raw.github.com/keir/dotfiles/master/install.sh | bash
+    curl https://raw.githubusercontent.com/keir/dotfiles/master/install.sh | bash
 
 Warning: The installer will mercilessly overwrite your existing .vimrc, .zshrc,
 .gitconfig, and other dotfiles.
