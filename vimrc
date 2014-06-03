@@ -12,6 +12,7 @@ set ignorecase
 set colorcolumn=81
 set statusline=%f\ %y\ format:\ %{&ff};\ C%c\ L%l/%L
 set noswapfile
+set laststatus=2
 
 syntax enable
 colorscheme desert
