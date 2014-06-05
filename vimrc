@@ -1,5 +1,6 @@
 " Package vim plugins with plugin-per-directory.
-execute pathogen#infect()
+" TODO(keir): Figure out why this is not working.
+"execute pathogen#infect()
 
 set t_Co=256
 set hlsearch
