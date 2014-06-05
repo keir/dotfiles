@@ -10,6 +10,8 @@ fi
 
 cd dotfiles
 
+# TODO: Install git, curl, zsh, vim if necessary.
+
 # Installs dotfiles into your home directory via links, overwriting whatever
 # else is there.
 ln -f -s `pwd`/vimrc ~/.vimrc
