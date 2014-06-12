@@ -167,8 +167,24 @@ function qd {
     return 0
   fi
 
+  # Make a branch name from the commit message; for example
+  #
+  #  Extend the fooBar to handle "Stuff"
+  #
+  # becomes
+  #
+  #  extend-the-foobar-to-handle-stuff
+  #
+  declare -r branch_name=$(
+      echo "$message"       |
+      tr A-Z a-z            |
+      sed -e 's/[^a-z]/-/g' |
+      sed -e 's/--*/-/g'    |
+      sed -e 's/^-//'       |
+      sed -e 's/-$//'       )
+
   echo "$cmd: Creating new diff with message: $message..."
-  git checkout -b qd-$(date "+%Y-%m-%dT%H-%M-%S")
+  git checkout -b $branch_name
   git commit -a -m "$message"
   arc diff --verbatim --allow-untracked --reviewers $reviewer
 }
