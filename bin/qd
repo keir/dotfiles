@@ -5,7 +5,7 @@ declare -r message=$1
 declare -r reviewer=$2
 declare -r current_branch="$(git symbolic-ref HEAD 2> /dev/null | cut -d'/' -f3)"
 
-if [ -z $message ] ; then
+if [ -z "$message" ] ; then
   echo "Send a diff for review of any staged or unstaged changes, and"
   echo "creates a branch from the commit message."
   echo
@@ -33,7 +33,7 @@ if [ -z "$(git diff --shortstat)" ] ; then
   exit 1
 fi
 
-if [ -z $reviewer ] ; then
+if [ -z "$reviewer" ] ; then
   echo "$cmd: Updating existing diff with message: $message..."
   if [[ $(current_branch) == 'master' ]] ; then
     echo "$cmd: ERROR: Can't update a diff on master; did you forget a"
@@ -41,7 +41,7 @@ if [ -z $reviewer ] ; then
     exit 1
   fi
   git commit -a -m "$message"
-  arc diff --verbatim --allow-untracked --message "$message"
+  arc diff --nolint --nounit --verbatim --allow-untracked --message "$message"
   exit 0
 fi
 
@@ -69,4 +69,4 @@ git checkout -b $branch_name
 git stash apply
 
 git commit -a -m "$message"
-arc diff --verbatim --allow-untracked --reviewers $reviewer
+arc diff --nolint --nounit --verbatim --allow-untracked --reviewers $reviewer
