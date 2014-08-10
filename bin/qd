@@ -28,14 +28,14 @@ if [ -z "$message" ] ; then
   exit 1
 fi
 
-if [ -z "$(git diff --shortstat)" ] ; then
+if [ -z "$(git diff HEAD --shortstat)" ] ; then
   echo 'ERROR: No changes in working tree; cowardly refusing to continue.'
   exit 1
 fi
 
 if [ -z "$reviewer" ] ; then
   echo "$cmd: Updating existing diff with message: $message..."
-  if [[ $(current_branch) == 'master' ]] ; then
+  if [[ $current_branch == 'master' ]] ; then
     echo "$cmd: ERROR: Can't update a diff on master; did you forget a"
     echo "$cmd:        reviewer or forget to switch to a branch?"
     exit 1
