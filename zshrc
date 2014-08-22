@@ -168,3 +168,7 @@ alias gds='git diff --stat'
 alias gdst='git diff --stat'
 alias gcam='git commit -a -m'
 alias gam='git commit -a --amend'
+
+# Apt aliases.
+alias i='sudo apt-get install'
+alias s='sudo apt-cache search'
