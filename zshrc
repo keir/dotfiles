@@ -29,14 +29,19 @@ setopt extended_glob
 setopt autocd
 
 # ==== Paths ==================================================================
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-
 function append_path {
   export PATH=$PATH:$1
 }
 
-append_path $HOME/dotfiles/bin
+# First appended paths are searched first.
 append_path $HOME/wrk/phabricator/arcanist/bin
+append_path $HOME/dotfiles/bin
+append_path /usr/local/sbin
+append_path /usr/local/bin
+append_path /usr/sbin
+append_path /usr/bin
+append_path /sbin
+append_path /bin
 
 if [[ $OS == 'Darwin' ]] ; then 
   # The Mac OS X Git installer puts Git here.
