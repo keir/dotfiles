@@ -177,3 +177,8 @@ alias gam='git commit -a --amend'
 # Apt aliases.
 alias i='sudo apt-get install'
 alias s='sudo apt-cache search'
+
+# All machine-local settings go in .zshrc-local.
+if [[ -a "$HOME/.zshrc-local" ]] ; then
+  source $HOME/.zshrc-local
+fi
