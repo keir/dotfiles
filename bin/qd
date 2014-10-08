@@ -41,7 +41,7 @@ if [ -z "$reviewer" ] ; then
     exit 1
   fi
   git commit -a -m "$message"
-  arc diff --nolint --nounit --verbatim --allow-untracked --message "$message"
+  arc diff --nounit --verbatim --allow-untracked --message "$message"
   exit 0
 fi
 
