@@ -10,7 +10,6 @@ set smartindent
 set expandtab
 set hlsearch
 set ignorecase
-set colorcolumn=81
 set statusline=%f\ %y\ format:\ %{&ff};\ C%c\ L%l/%L
 set noswapfile
 set laststatus=2
@@ -18,5 +17,7 @@ set laststatus=2
 syntax enable
 colorscheme desert
 
-" The default red color column is obnoxius in terminals.
+" The default red color for the 80-char column is obnoxius.
+set colorcolumn=81
 highlight ColorColumn ctermbg=8
+highlight ColorColumn guibg='#444444'
