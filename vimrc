@@ -10,7 +10,7 @@ set smartindent
 set expandtab
 set hlsearch
 set ignorecase
-set statusline=%f\ %y\ format:\ %{&ff};\ C%c\ L%l/%L
+set statusline=%f\ %y\ format:\ %{&ff};\ C%c\ L%l/%L\ %m
 set noswapfile
 set laststatus=2
 
