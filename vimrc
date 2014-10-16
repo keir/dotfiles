@@ -13,6 +13,9 @@ set ignorecase
 set statusline=%f\ %y\ format:\ %{&ff};\ C%c\ L%l/%L\ %m
 set noswapfile
 set laststatus=2
+set autoread
+set mousemodel=popup
+set guioptions-=T
 
 syntax enable
 colorscheme desert
