@@ -19,3 +19,6 @@ ln -f -s `pwd`/vim ~/.vim
 ln -f -s `pwd`/zshrc ~/.zshrc
 ln -f -s `pwd`/gitconfig ~/.gitconfig
 ln -f -s `pwd`/tmux.conf ~/.tmux.conf
+
+mkdir -p ~/.ipython/profile_default/
+ln -f -s `pwd`/ipython_config.py ~/.ipython/profile_default/ipython_config.py
