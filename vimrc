@@ -24,3 +24,7 @@ colorscheme desert
 set colorcolumn=81
 highlight ColorColumn ctermbg=8
 highlight ColorColumn guibg='#444444'
+
+" Make C-s work like escape, and also save. Much easier to type on keyboards
+" that have awkward escape keys.
+imap <C-s> <ESC>:wa<CR>
