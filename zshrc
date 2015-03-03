@@ -18,7 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-declare -r OS=$(uname)
+declare -r OPERATING_SYSTEM=$(uname)
 
 # ==== Options ================================================================
 
@@ -43,7 +43,7 @@ append_path /usr/bin
 append_path /sbin
 append_path /bin
 
-if [[ $OS == 'Darwin' ]] ; then 
+if [[ $OPERATING_SYSTEM == 'Darwin' ]] ; then
   # The Mac OS X Git installer puts Git here.
   append_path /usr/local/git/bin
 
@@ -132,7 +132,7 @@ PROMPT="$PROMPT%{$reset_color%}"
 # ==== Aliases ================================================================
 
 # Normal aliases.
-if [[ $OS == 'Darwin' ]] ; then
+if [[ $OPERATING_SYSTEM == 'Darwin' ]] ; then
   alias ls='ls -G'
   alias ll='ls -l -G'
 else
@@ -148,7 +148,7 @@ alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
 
-# Handy pipe operators.
+# Handy pipe operators; work at the end of a command, e.g. 'foo V'.
 alias -g G='| grep'
 alias -g H='| head'
 alias -g T='| tail'
@@ -166,13 +166,13 @@ alias -g XG='| xargs grep'
 alias -g X='| xargs'
 
 # Git aliases.
-alias gs='git status'
-alias gst='git status'
+alias gs='git status --short'
 alias gd='git diff'
 alias gds='git diff --stat'
 alias gdst='git diff --stat'
 alias gcam='git commit -a -m'
 alias gam='git commit -a --amend'
+alias gc='git commit'
 
 # Apt aliases.
 alias i='sudo apt-get install'
