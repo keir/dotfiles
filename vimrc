@@ -28,3 +28,4 @@ highlight ColorColumn guibg='#444444'
 " Make C-s work like escape, and also save. Much easier to type on keyboards
 " that have awkward escape keys.
 imap <C-s> <ESC>:wa<CR>
+nmap <C-s> :wa<CR>
