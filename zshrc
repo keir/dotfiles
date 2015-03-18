@@ -167,6 +167,7 @@ alias -g X='| xargs'
 
 # Git aliases.
 alias gs='git status --short'
+alias gst='git status --short'
 alias gd='git diff'
 alias gds='git diff --stat'
 alias gdst='git diff --stat'
