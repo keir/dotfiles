@@ -1,0 +1,61 @@
+#!/bin/bash
+# Author: Keir Mierle (mierle@gmail.com)
+
+declare -r cmd=$0
+declare -r message=$1
+declare -r current_branch="$(git symbolic-ref HEAD 2> /dev/null | cut -d'/' -f3)"
+
+if [ -z "$message" ] ; then
+  echo "Create a Gerrit change for review of any staged or unstaged changes, "
+  echo "and creates a branch from the commit message."
+  echo
+  echo "Create a new review and branch from uncommitted changes on master:"
+  echo
+  echo "  $cmd <message>"
+  echo
+  echo "Update review from uncommitted changes on master:"
+  echo
+  echo "  $cmd"
+  echo
+  exit 1
+fi
+
+if [ -z "$(git diff HEAD --shortstat)" ] ; then
+  echo 'ERROR: No changes in working tree; cowardly refusing to continue.'
+  exit 1
+fi
+
+if [[ $current_branch == 'master' ]] ; then
+  # If we're on master, create a new branch and review.
+
+  # Make a branch name from the commit message; for example
+  #
+  #  Extend the fooBar to handle "Stuff"
+  #
+  # becomes
+  #
+  #  extend-the-foobar-to-handle-stuff
+  #
+  declare -r branch_name=$(
+      echo "$message"       |
+      tr A-Z a-z            |
+      sed -e 's/[^a-z]/-/g' |
+      sed -e 's/--*/-/g'    |
+      sed -e 's/^-//'       |
+      sed -e 's/-$//'       )
+
+  echo "$cmd: Creating new review and branch $branch_name..."
+
+  # Use git stash instead of checkout -b to support added but uncommitted files.
+  git stash
+  git checkout -b $branch_name
+  git stash apply
+  git commit -a -m "$message"
+else
+  # If we're not on master, assume there is already a review; update it.
+  echo "$cmd: Updating existing review..."
+  git commit -a --amend
+fi
+
+# Push to Gerrit (assumed to be origin).
+git push origin HEAD:refs/for/master
