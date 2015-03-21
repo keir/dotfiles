@@ -174,6 +174,7 @@ alias gdst='git diff --stat'
 alias gcam='git commit -a -m'
 alias gam='git commit -a --amend'
 alias gc='git commit'
+alias gco='git checkout'
 
 # Apt aliases.
 alias i='sudo apt-get install'
