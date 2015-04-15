@@ -1,0 +1,32 @@
+#!/usr/bin/python
+# Author: mierle@gmail.com (Keir Mierle)
+
+import sys
+
+def error(msg):
+  sys.stderr.write('ERROR: %s\n' % msg)
+  sys.exit(1)
+
+if len(sys.argv) == 1:
+  sys.stderr.write('usage: pick <index> [<index>...]\n')
+  sys.exit(1)
+
+try:
+  picked_columns = map(int, sys.argv[1:])
+except ValueError:
+  error('Not all arguments are integers: %s' % ' '.join(sys.argv[1:]))
+
+try:
+  number = 0
+  for line in sys.stdin:
+    columns = line.split()
+    try:
+      print ' '.join(columns[picked_column]
+                     for picked_column in picked_columns)
+    except IndexError:
+      error('Tried to pick invalid column on line %s of input:\n%s' %
+            (number, line))
+    number += 1
+except KeyboardInterrupt:
+  error('Interrupted on line %s; aborting' % number)
+
