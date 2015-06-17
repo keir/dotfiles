@@ -36,6 +36,7 @@ function append_path {
 # First appended paths are searched first.
 append_path $HOME/wrk/phabricator/arcanist/bin
 append_path $HOME/dotfiles/bin
+append_path $HOME/bin
 append_path /usr/local/sbin
 append_path /usr/local/bin
 append_path /usr/sbin
