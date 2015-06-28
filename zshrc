@@ -18,7 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-declare -r OPERATING_SYSTEM=$(uname)
+OPERATING_SYSTEM=$(uname)
 
 # ==== Options ================================================================
 
