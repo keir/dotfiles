@@ -130,6 +130,25 @@ PROMPT="$PROMPT
 PROMPT="$PROMPT%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%# "
 PROMPT="$PROMPT%{$reset_color%}"
 
+# Set the terminal title; set the window name for tmux and screen.
+function auto_termnial_title {
+  echo "$(basename `pwd`)"
+}
+
+case $TERM in
+  xterm*)
+    precmd () {
+      print -Pn "\e]0;$(auto_termnial_title)\a"
+    }
+    ;;
+  screen*)
+    # This also works for tmux.
+    precmd() {
+      print -Pn "\033k$(auto_termnial_title)\033\\"
+    }
+    ;;
+esac
+
 # ==== Aliases ================================================================
 
 # Normal aliases.
