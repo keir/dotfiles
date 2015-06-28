@@ -194,6 +194,7 @@ alias gdst='git diff --stat'
 alias gcam='git commit -a -m'
 alias gam='git commit -a --amend'
 alias gc='git commit'
+alias gcm='git commit -m'
 alias gco='git checkout'
 alias ga='git add'
 
