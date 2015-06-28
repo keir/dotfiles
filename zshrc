@@ -132,7 +132,8 @@ PROMPT="$PROMPT%{$reset_color%}"
 
 # Set the terminal title; set the window name for tmux and screen.
 function auto_termnial_title {
-  echo "$(basename `pwd`)"
+  # Doing this with basename and pwd doesn't work due to paths with spaces.
+  python -c 'import os; print os.path.basename(os.getcwd())'
 }
 
 case $TERM in
