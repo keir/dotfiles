@@ -8,3 +8,6 @@
 
 [push]
   default = simple
+
+[color]
+  ui = auto
