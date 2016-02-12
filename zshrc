@@ -119,7 +119,7 @@ PROMPT="$PROMPT%{$fg_bold[white]%}%n"   # Username
 PROMPT="$PROMPT%{$fg_bold[magenta]%}@"
 PROMPT="$PROMPT%{$fg_bold[white]%}%m "  # Hostname
 PROMPT="$PROMPT%{$c3%}==== "
-PROMPT="$PROMPT%{$fg_bold[white]%}%d "  # Directory
+PROMPT="$PROMPT%{$fg_bold[white]%}%~ "  # Directory
 PROMPT="$PROMPT%{$c4%}==== "
 PROMPT="$PROMPT%{$fg_bold[green]%}\$(git_branch)  "
 # Yes, the newline is necessary.
