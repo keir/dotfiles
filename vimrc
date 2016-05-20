@@ -16,6 +16,7 @@ set laststatus=2
 set autoread
 set mousemodel=popup
 set guioptions-=T
+set backspace=indent,eol,start  " Needed on Windows to support bksp everywhere.
 
 syntax enable
 colorscheme desert
