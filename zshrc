@@ -162,6 +162,10 @@ else
   alias ll='ls -l --color'
 fi
 
+# Typo aliases.
+alias sl=ls
+alias gerp=grep
+
 # Global aliases; these expand anywhere on the command line.
 
 # Handy directory navigation.
