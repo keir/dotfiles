@@ -18,6 +18,10 @@ set mousemodel=popup
 set guioptions-=T
 set backspace=indent,eol,start  " Needed on Windows to support bksp everywhere.
 
+if has("win32")
+  set guifont="Consolas:h8:cANSI"
+end
+
 syntax enable
 colorscheme desert
 
