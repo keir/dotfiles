@@ -28,6 +28,40 @@ setopt extended_glob
 # Change into directories just with their name (no "cd" necessary).
 setopt autocd
 
+# Store starting and ending timestamps for every command in the history.
+setopt extended_history
+
+# ==== History ================================================================
+
+# Don't execute immediately when doing history substitution.
+setopt hist_verify
+
+# Don't truncate existing history file when full; rename first to <hist>.new.
+setopt hist_save_by_copy
+
+# Don't make history entries for subsequent duplicate commands. Does not alter
+# previous history commands that are duplicated (e.g. 'make; make; make' ->
+# 'make', but 'make; ls; make' would be unchanged).
+setopt hist_ignore_dups
+
+# Do not display a line previously found.
+setopt hist_find_no_dups
+
+# We DO want to save multiple lines for multi-line commands.
+unsetopt hist_reduce_blanks
+
+# Append history to a shared file, after commands complete. Also attach the
+# time to execute each command. Exclusive with options: inc_append_history,
+# append_history, and share_history.
+unsetopt append_history
+unsetopt share_history
+unsetopt inc_append_history
+setopt inc_append_history_time
+
+export HISTFILE=$HOME/.zsh-history
+export HISTSIZE=1000000  # A million should be enough.
+export SAVEHIST=1000000
+
 # ==== Paths ==================================================================
 function append_path {
   export PATH=$PATH:$1
