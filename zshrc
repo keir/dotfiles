@@ -28,10 +28,10 @@ setopt extended_glob
 # Change into directories just with their name (no "cd" necessary).
 setopt autocd
 
+# ==== History ================================================================
+
 # Store starting and ending timestamps for every command in the history.
 setopt extended_history
-
-# ==== History ================================================================
 
 # Don't execute immediately when doing history substitution.
 setopt hist_verify
