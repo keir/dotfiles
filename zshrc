@@ -71,6 +71,7 @@ function append_path {
 append_path $HOME/wrk/phabricator/arcanist/bin
 append_path $HOME/dotfiles/bin
 append_path $HOME/bin
+append_path $HOME/.cargo/bin
 append_path /usr/local/sbin
 append_path /usr/local/bin
 append_path /usr/sbin
@@ -200,6 +201,10 @@ fi
 alias sl=ls
 alias gerp=grep
 
+function vf() {
+  vim $($HOME/.fzf/bin/fzf)
+}
+
 # Global aliases; these expand anywhere on the command line.
 
 # Handy directory navigation.
@@ -241,7 +246,12 @@ alias ga='git add'
 alias i='sudo apt-get install'
 alias s='sudo apt-cache search'
 
+# ==== Machine local config ===================================================
 # All machine-local settings go in .zshrc-local.
 if [[ -a "$HOME/.zshrc-local" ]] ; then
   source $HOME/.zshrc-local
 fi
+
+# Configure the Fuzzy File Finder (FZF) if present. Usually installed with
+# :PlugInstall in vim first.
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

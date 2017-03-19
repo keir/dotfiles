@@ -1,7 +1,3 @@
-" Package vim plugins with plugin-per-directory.
-" TODO(keir): Figure out why this is not working.
-"execute pathogen#infect()
-
 set t_Co=256
 set hlsearch
 set background=dark
@@ -11,12 +7,13 @@ set expandtab
 set hlsearch
 set ignorecase
 set statusline=%f\ %y\ format:\ %{&ff};\ C%c\ L%l/%L\ %m
-set noswapfile
+set noswapfile  " Swap files are super annoying in general; just forget them.
 set laststatus=2
 set autoread
-set mousemodel=popup
-set guioptions-=T
+set mousemodel=popup  " Right-click to copy/paste/etc.
+set guioptions-=T     " Don't show the menubar in gvim.
 set backspace=indent,eol,start  " Needed on Windows to support bksp everywhere.
+set wildmenu  " Display possible choices when opening files e.g. :e .v*<TAB>.
 
 if has("win32")
   set guifont="Consolas:h8:cANSI"
@@ -34,3 +31,40 @@ highlight ColorColumn guibg='#444444'
 " that have awkward escape keys.
 imap <C-s> <ESC>:wa<CR>
 nmap <C-s> :wa<CR>
+
+" Move up and down by visual line - so even wrapped lines move up and down one
+" line rather than jumping down.
+nnoremap j gj
+nnoremap k gk
+
+" ----------------------------- vim-plug ---------------------------------------
+" When setting up a new computer, run ":PlugInstall" in Vim to set up. Run
+" ":PlugUpdate" periodically to update all plugins.
+
+" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+call plug#begin('~/.vim/plugged')
+
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'junegunn/vim-easy-align'
+
+" Any valid git URL is allowed
+Plug 'junegunn/vim-github-dashboard'
+
+" On-demand loading
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+" TODO: Set You Complete Me up someday; could be nice.
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+" Plugin outside ~/.vim/plugged with post-update hook
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" Git integration.
+Plug 'tpope/vim-fugitive'
+
+" Initialize plugin system
+call plug#end()
+
+"let g:fzf_launcher = 'urxvt -geometry 120x30 -e sh -c %s'
+let g:fzf_launcher = 'xterm -bg black -geometry 120x30 -e sh -c %s'
