@@ -205,6 +205,9 @@ function vf() {
   vim $($HOME/.fzf/bin/fzf)
 }
 
+function gvf() {
+  gvim $($HOME/.fzf/bin/fzf)
+}
 # Global aliases; these expand anywhere on the command line.
 
 # Handy directory navigation.
