@@ -67,8 +67,10 @@ noremap <leader>s :FZF<CR>
 Plug 'tpope/vim-fugitive'
 " After running a grep command (like :Ggrep), pop the quick fix window open.
 autocmd QuickFixCmdPost *grep* cwindow
+noremap <leader>c :Gstatus<CR>
 
 " Better status line.
+" Also check out: https://github.com/powerline/powerline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "
