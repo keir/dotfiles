@@ -54,9 +54,9 @@ unsetopt hist_reduce_blanks
 # time to execute each command. Exclusive with options: inc_append_history,
 # append_history, and share_history.
 unsetopt append_history
-unsetopt share_history
 unsetopt inc_append_history
-setopt inc_append_history_time
+unsetopt inc_append_history_time
+setopt share_history
 
 export HISTFILE=$HOME/.zsh-history
 export HISTSIZE=1000000  # A million should be enough.
