@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -x
 set -u
 
@@ -17,6 +17,7 @@ cd dotfiles
 ln -f -s `pwd`/vimrc ~/.vimrc
 ln -f -s `pwd`/vim ~/.vim
 ln -f -s `pwd`/zshrc ~/.zshrc
+ln -f -s `pwd`/bashrc ~/.bashrc
 ln -f -s `pwd`/gitconfig ~/.gitconfig
 ln -f -s `pwd`/tmux.conf ~/.tmux.conf
 
