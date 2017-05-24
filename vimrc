@@ -73,7 +73,9 @@ noremap <leader>c :Gstatus<CR>
 " Also check out: https://github.com/powerline/powerline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"
+
+Plug 'matze/vim-lilypond'
+
 " Initialize plugin system
 call plug#end()
 " ----------------------------- vim-plug end -----------------------------------
