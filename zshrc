@@ -28,6 +28,11 @@ setopt extended_glob
 # Change into directories just with their name (no "cd" necessary).
 setopt autocd
 
+# Always push directories to the stack. Best used in conjunction with 'sd'
+# (search directories) command that uses FZF to look at previous directories
+# and pick one.
+setopt autopushd
+
 # ==== History ================================================================
 
 # Store starting and ending timestamps for every command in the history.
@@ -208,6 +213,11 @@ function vf() {
 function gvf() {
   gvim $($HOME/.fzf/bin/fzf)
 }
+
+# Interactive change directory with FZF. Uses your directory stack to pick the
+# directory. For some reason this only works as an alias.
+alias sd='cd $(dirs -lp | uniq | $HOME/.fzf/bin/fzf --height=15)'
+
 # Global aliases; these expand anywhere on the command line.
 
 # Handy directory navigation.
@@ -248,6 +258,11 @@ alias ga='git add'
 # Apt aliases.
 alias i='sudo apt-get install'
 alias s='sudo apt-cache search'
+
+# ==== Keybindings ============================================================
+
+# Ctrl-space - print git status.
+bindkey -s '^ ' 'git status --short^M'
 
 # ==== Machine local config ===================================================
 # All machine-local settings go in .zshrc-local.
