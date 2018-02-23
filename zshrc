@@ -76,7 +76,13 @@ function append_path {
 append_path $HOME/wrk/phabricator/arcanist/bin
 append_path $HOME/dotfiles/bin
 append_path $HOME/bin
+
+# For Rust's Cargo package manager.
 append_path $HOME/.cargo/bin
+
+# For pipsi.
+append_path $HOME/.local/bin
+
 append_path /usr/local/sbin
 append_path /usr/local/bin
 append_path /usr/sbin
