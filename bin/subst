@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
+import os
 import re
 import sys
 
@@ -10,24 +11,51 @@ parser.add_argument('-p', '--pattern', required=True)
 parser.add_argument('-r', '--replacement', required=True)
 parser.add_argument('--raw', help='use raw strings and not regexes',
                     action='store_true')
+parser.add_argument('--preview', help='preview changes instead of writing',
+                    action='store_true')
 parser.add_argument('files', help='files to run the replacement on', nargs='*')
 
 args = parser.parse_args()
 
 if not args.raw:
-  regex = re.compile(args.pattern)
+  pattern_regex = re.compile(args.pattern)
 
-if args.files:
-  # Substitute in-place on each file.
-  for filename in args.files:
+# Substitute from stdin to stdout.
+if not args.files:
+  print pattern_regex.sub(args.replacement, sys.stdin.read()),
+  sys.exit(0)
+
+# Substitute in-place on each file.
+for filename in args.files:
+  # Skip anything that's not a file.
+  if not os.path.isfile(filename):
+    continue
+
+  # Read the file contents, or bail if it can't be read.
+  try:
     with file(filename) as fd:
-      data = fd.read()
-    with file(filename, 'w') as fd:
-      if args.raw:
-        fd.write(data.replace(args.pattern, args.replacement))
-      else:
-        fd.write(regex.sub(args.replacement, data))
-else:
-  # Substitute from stdin to stdout.
-  print regex.sub(args.replacement, sys.stdin.read()),
-  
+      file_contents = fd.read()
+  except IOError as e:
+    print >> sys.stderr, "ERROR: Couldn't read", filename
+    continue
+
+  # In preview mode, only display the changes but don't actually make them.
+  if args.preview:
+    printed_filename = False
+    for match in pattern_regex.finditer(file_contents):
+      if not printed_filename:
+        print filename
+        printed_filename = True
+      print '-', match.group()
+      print '+', pattern_regex.sub(args.replacement, match.group())
+
+    # If no filename was printed, add a newline.
+    if printed_filename:
+      print
+    continue
+
+  with file(filename, 'w') as fd:
+    if args.raw:
+      fd.write(file_contents.replace(args.pattern, args.replacement))
+    else:
+      fd.write(pattern_regex.sub(args.replacement, file_contents))
