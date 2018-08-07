@@ -159,7 +159,7 @@ c4="$FG[$(get_host_color 4)]"
 
 PROMPT=""
 PROMPT="$PROMPT%{$c1%}==== "
-PROMPT="$PROMPT%{$fg_bold[white]%}%T "  # Time
+PROMPT="$PROMPT%{$fg_bold[white]%}%* "  # Time
 PROMPT="$PROMPT%{$c2%}==== "
 PROMPT="$PROMPT%{$fg_bold[white]%}%n"   # Username
 PROMPT="$PROMPT%{$fg_bold[magenta]%}@"
