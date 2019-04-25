@@ -143,15 +143,23 @@ git_branch() {
 # Pick four colors at random, seeded by the hostname, when the shell is
 # launched. Using all these colors in the prompt makes for a more distinct
 # pattern for each host than only coloring one part of the prompt differently.
+zsh_prompt_python=$(which python)
+if ! [ -x "${zsh_prompt_python}" ] ; then
+  zsh_prompt_python=python3
+fi
+
 function get_host_color {
-  python -c "
+  ${zsh_prompt_python} -c "
+from __future__ import print_function
 import random
 import socket
 random.seed(socket.gethostname())
-for i in range($1): random.randint(0, 255)
-print '%03d' % random.randint(0, 255)
+for i in range($1):
+  random.randint(0, 255)
+print('%03d' % random.randint(0, 255))
 "
 }
+
 c1="$FG[$(get_host_color 1)]"
 c2="$FG[$(get_host_color 2)]"
 c3="$FG[$(get_host_color 3)]"
@@ -177,21 +185,29 @@ PROMPT="$PROMPT%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%# "
 PROMPT="$PROMPT%{$reset_color%}"
 
 # Set the terminal title; set the window name for tmux and screen.
-function auto_termnial_title {
+function auto_terminal_title {
   # Doing this with basename and pwd doesn't work due to paths with spaces.
   python -c 'import os; print os.path.basename(os.getcwd())'
+}
+
+function auto_terminal_title {
+  ${zsh_prompt_python} -c "
+from __future__ import print_function
+import os
+print(os.path.basename(os.getcwd()))
+"
 }
 
 case $TERM in
   xterm*)
     precmd () {
-      print -Pn "\e]0;$(auto_termnial_title)\a"
+      print -Pn "\e]0;$(auto_terminal_title)\a"
     }
     ;;
   screen*)
     # This also works for tmux.
     precmd() {
-      print -Pn "\033k$(auto_termnial_title)\033\\"
+      print -Pn "\033k$(auto_terminal_title)\033\\"
     }
     ;;
 esac
