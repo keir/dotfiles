@@ -74,7 +74,8 @@ noremap <leader>c :Gstatus<CR>
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'matze/vim-lilypond'
+" Syntax highlighting for the GN build system.
+Plug 'https://gn.googlesource.com/gn', { 'rtp': 'tools/gn/misc/vim' }
 
 " Initialize plugin system
 call plug#end()
