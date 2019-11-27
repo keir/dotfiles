@@ -18,7 +18,7 @@ parser.add_argument('files', help='files to run the replacement on', nargs='*')
 args = parser.parse_args()
 
 if not args.raw:
-  pattern_regex = re.compile(args.pattern)
+  pattern_regex = re.compile(args.pattern, re.MULTILINE)
 
 # Substitute from stdin to stdout.
 if not args.files:
