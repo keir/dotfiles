@@ -140,14 +140,15 @@ git_branch() {
   git symbolic-ref HEAD 2> /dev/null | cut -d'/' -f3
 }
 
+# Find a Python; try for Python3 first.
+zsh_prompt_python=$(which python3)
+if ! [ -x "${zsh_prompt_python}" ] ; then
+  zsh_prompt_python=python
+fi
+
 # Pick four colors at random, seeded by the hostname, when the shell is
 # launched. Using all these colors in the prompt makes for a more distinct
 # pattern for each host than only coloring one part of the prompt differently.
-zsh_prompt_python=$(which python)
-if ! [ -x "${zsh_prompt_python}" ] ; then
-  zsh_prompt_python=python3
-fi
-
 function get_host_color {
   ${zsh_prompt_python} -c "
 from __future__ import print_function
@@ -187,7 +188,7 @@ PROMPT="$PROMPT%{$reset_color%}"
 # Set the terminal title; set the window name for tmux and screen.
 function auto_terminal_title {
   # Doing this with basename and pwd doesn't work due to paths with spaces.
-  python -c 'import os; print os.path.basename(os.getcwd())'
+  ${zsh_prompt_python} -c 'import os; print(os.path.basename(os.getcwd()))'
 }
 
 function auto_terminal_title {
