@@ -23,3 +23,11 @@ ln -f -s `pwd`/tmux.conf ~/.tmux.conf
 
 mkdir -p ~/.ipython/profile_default/
 ln -f -s `pwd`/ipython_config.py ~/.ipython/profile_default/ipython_config.py
+
+# Install sensible behaviour for home/end on macOS.
+# See: http://cobus.io/osx/2017/02/09/OSX_Home_End_Keys.html
+#      https://damieng.com/blog/2015/04/24/make-home-end-keys-behave-like-windows-on-mac-os-x
+if [ "$(uname)" == "Darwin" ] ; then
+  mkdir -p ~/Library/KeyBindings
+  ln -s `pwd`/DefaultKeyBinding.dict $HOME/Library/KeyBindings/
+fi
