@@ -1,5 +1,7 @@
 set t_Co=256
+set termguicolors  " Enable true color support on the terminal.
 set hlsearch
+set background=light
 set background=dark
 set shiftwidth=2
 set smartindent
@@ -15,17 +17,32 @@ set guioptions-=T     " Don't show the menubar in gvim.
 set backspace=indent,eol,start  " Needed on Windows to support bksp everywhere.
 set wildmenu  " Display possible choices when opening files e.g. :e .v*<TAB>.
 
-if has("win32")
-  set guifont="Consolas:h8:cANSI"
-end
+" Usable OS name. Likely values of g:os are 'Windows', 'Linux', and 'Darwin'
+if !exists("g:os")
+  if has("win64") || has("win32") || has("win16")
+    let g:os = "Windows"
+  else
+    let g:os = substitute(system('uname'), '\n', '', '')
+  endif
+endif
+
+" Font selection for GVim (Linux & Windows) and MacVim.
+if has("gui_running")
+  if g:os == "Darwin"
+    set guifont=Menlo\ Regular:h20
+    set lines=40
+    set columns=100
+  elseif g:os == "Linux"
+    set guifont=Fira\ Mono 10
+  elseif g:os == "Windows"
+    set guifont=Consolas:h8:cANSI
+  endif
+endif
 
 syntax enable
-colorscheme desert
 
 " The default red color for the 80-char column is obnoxius.
 set colorcolumn=81
-highlight ColorColumn ctermbg=8
-highlight ColorColumn guibg='#444444'
 
 let mapleader = ","
 
@@ -59,7 +76,6 @@ Plug 'mhinz/vim-signify'
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-"let g:fzf_launcher = 'urxvt -geometry 120x30 -e sh -c %s'
 let g:fzf_launcher = 'xterm -bg black -geometry 120x30 -e sh -c %s'
 noremap <leader>s :FZF<CR>
 
@@ -77,9 +93,14 @@ Plug 'vim-airline/vim-airline-themes'
 " Syntax highlighting for the GN build system.
 Plug 'https://gn.googlesource.com/gn', { 'rtp': 'tools/gn/misc/vim' }
 
+Plug 'NLKNguyen/papercolor-theme'
+
 " Initialize plugin system
 call plug#end()
 " ----------------------------- vim-plug end -----------------------------------
+
+" Must be set after plugins end since PaperColor is from a plugin.
+colorscheme PaperColor
 
 " Make C-s work like escape, and also save. Much easier to type on keyboards
 " that have awkward escape keys.

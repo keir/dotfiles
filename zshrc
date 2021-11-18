@@ -237,6 +237,11 @@ function gvf() {
   gvim $($HOME/.fzf/bin/fzf)
 }
 
+# It's hard to kick the habit of typing "gvim" instead of "mvim".
+if [[ $OPERATING_SYSTEM == 'Darwin' ]] ; then
+  alias gvim='mvim'
+fi
+
 # Interactive change directory with FZF. Uses your directory stack to pick the
 # directory. For some reason this only works as an alias.
 alias sd='cd $(dirs -lp | uniq | $HOME/.fzf/bin/fzf --height=15)'
@@ -277,6 +282,8 @@ alias gc='git commit'
 alias gcm='git commit -m'
 alias gco='git checkout'
 alias ga='git add'
+alias grim='git rebase -i master'
+alias grm='git rebase master'
 
 # Apt aliases.
 alias i='sudo apt-get install'
