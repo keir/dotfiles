@@ -31,3 +31,14 @@ if [ "$(uname)" == "Darwin" ] ; then
   mkdir -p ~/Library/KeyBindings
   ln -s `pwd`/DefaultKeyBinding.dict $HOME/Library/KeyBindings/
 fi
+
+# Fix Visual Studio Code key repeat for Vim emulation.
+#
+# Apple has a feature that breaks key repeat in Vim and VSCode; disable it. For
+# more details, see the VSCode Vim plugin page:
+#
+#   https://github.com/VSCodeVim/Vim#mac-setup
+#
+if [ "$(uname)" == "Darwin" ] ; then
+  defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+fi
